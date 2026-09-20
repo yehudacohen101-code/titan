@@ -82,8 +82,15 @@ reduced motion, and only while on screen. If autoplay is refused the poster
 holds and the button offers play.
 
 Four more films sit in the gallery's "Recent work" group: polished plaster on a
-curved commercial wall, a meadow band painted round a bathroom, a blossom tree
-up a staircase, and a restaurant's wood and textured walls. All five sources
+curved commercial wall (Beverly Hills, 2026), a meadow band painted round a
+bathroom (location still unconfirmed), a blossom tree up a staircase (Pacific
+Palisades, 2026) and a restaurant's wood and textured walls (Manhattan Beach,
+2026).
+
+The Swiss fresco is kept for what it proves about the hand, not as a claim of
+availability: Marco says it was a one-off and he wants the work kept in
+Southern California, so the film section says so and the biography timeline
+still ends in Los Angeles. All five sources
 carried `rotation=-90` metadata — they are portrait, not the landscape their
 stored frames suggest, and one early encode forced them the wrong way round
 before that was caught.
