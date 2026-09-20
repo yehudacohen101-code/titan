@@ -1,0 +1,670 @@
+<title>Marco Lamberti Site Handover</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;1,6..96,400&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* Same palette and faces as the site itself, in a document treatment. */
+:root{
+  --ink:#e7e2d7; --panel:#f1eee6; --panel-2:#f8f6f0;
+  --line:#cfc8b8; --line-soft:#ded8ca;
+  --text:#1c2422; --text-2:#515d58; --text-3:#7b857f;
+  --peacock:#1d6781; --gilt:#8a6620;
+  --ok:#2f6b46; --warn:#8a5a14; --stop:#94341f;
+  --ok-bg:#e2eee6; --warn-bg:#f5ead6; --stop-bg:#f6e2dc;
+  --bg:var(--ink); --maxw:900px;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#0f1817; --panel:#17211f; --panel-2:#1e2a27;
+    --line:#2a3733; --line-soft:#222e2b;
+    --text:#eae7dd; --text-2:#a3b0a9; --text-3:#78857f;
+    --peacock:#58b0cb; --gilt:#c79f50;
+    --ok:#7dc79c; --warn:#dcb06a; --stop:#e08a72;
+    --ok-bg:#16291f; --warn-bg:#2a2214; --stop-bg:#2c1a16;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#0f1817; --panel:#17211f; --panel-2:#1e2a27;
+  --line:#2a3733; --line-soft:#222e2b;
+  --text:#eae7dd; --text-2:#a3b0a9; --text-3:#78857f;
+  --peacock:#58b0cb; --gilt:#c79f50;
+  --ok:#7dc79c; --warn:#dcb06a; --stop:#e08a72;
+  --ok-bg:#16291f; --warn-bg:#2a2214; --stop-bg:#2c1a16;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:Archivo,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size:16px; line-height:1.65;
+}
+img{max-width:100%}
+a{color:var(--peacock)}
+:focus-visible{outline:2px solid var(--peacock); outline-offset:3px}
+.wrap{width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:20px}
+
+h1,h2,h3{font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:400; text-wrap:balance; margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.3rem); line-height:1.02}
+h2{font-size:clamp(1.55rem,3.6vw,2.15rem); line-height:1.12}
+h3{font-size:1.18rem}
+p{margin:0}
+.eyebrow{
+  font-size:.66rem; letter-spacing:.22em; text-transform:uppercase;
+  color:var(--text-3); font-weight:600; margin:0;
+}
+
+/* ── Masthead ───────────────────────────────────────────── */
+.mast{border-bottom:1px solid var(--line); background:var(--panel)}
+.mast-in{padding-block:clamp(40px,7vw,68px) 34px; display:flex; flex-direction:column; gap:18px}
+.mast .sub{color:var(--text-2); font-size:1.08rem; max-width:60ch}
+.mast .meta{
+  display:flex; flex-wrap:wrap; gap:8px 22px; font-size:.72rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--text-3); font-weight:600;
+  border-top:1px solid var(--line-soft); padding-top:18px; margin-top:6px;
+}
+.theme-btn{
+  position:fixed; right:14px; top:calc(14px + env(safe-area-inset-top,0px)); z-index:20;
+  width:36px; height:36px; display:grid; place-items:center; cursor:pointer; padding:0;
+  border:1px solid var(--line); background:var(--panel); color:var(--text-2);
+}
+.theme-btn:hover{color:var(--text); border-color:var(--gilt)}
+
+section{padding-block:clamp(38px,6vw,58px)}
+section + section{border-top:1px solid var(--line-soft)}
+.lede{color:var(--text-2); max-width:66ch; margin-top:14px; font-size:1.05rem}
+
+/* ── Verdict callout ────────────────────────────────────── */
+.callout{
+  border:1px solid var(--line); border-left:4px solid var(--stop);
+  background:var(--stop-bg); padding:22px 24px; margin-top:26px;
+}
+.callout.ok{border-left-color:var(--ok); background:var(--ok-bg)}
+.callout.warn{border-left-color:var(--warn); background:var(--warn-bg)}
+.callout h3{margin-bottom:8px; font-size:1.25rem}
+.callout p{color:var(--text-2)}
+.callout p + p{margin-top:10px}
+.callout cite{
+  display:block; margin-top:12px; font-style:normal; font-size:.82rem; color:var(--text-3);
+}
+
+/* ── Route comparison ───────────────────────────────────── */
+.routes{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; margin-top:28px}
+.route{border:1px solid var(--line); background:var(--panel); padding:24px}
+.route.pick{border-color:var(--gilt); box-shadow:inset 3px 0 0 var(--gilt)}
+.route .tag{
+  font-size:.62rem; letter-spacing:.18em; text-transform:uppercase; font-weight:600;
+  color:var(--gilt); display:block; margin-bottom:8px;
+}
+.route h3{margin-bottom:12px}
+.route ul{margin:14px 0 0; padding-left:0; list-style:none; display:grid; gap:9px}
+.route li{display:grid; grid-template-columns:18px 1fr; gap:9px; font-size:.93rem; color:var(--text-2)}
+.route li b{color:var(--text); font-weight:500}
+.route li .m{font-weight:700; line-height:1.4}
+.route li.y .m{color:var(--ok)} .route li.n .m{color:var(--stop)}
+
+/* ── Steps ──────────────────────────────────────────────── */
+.steps{list-style:none; counter-reset:s; margin:28px 0 0; padding:0; display:grid; gap:0}
+.steps > li{
+  counter-increment:s; display:grid; grid-template-columns:44px 1fr; gap:20px;
+  padding:22px 0; border-top:1px solid var(--line-soft);
+}
+.steps > li::before{
+  content:counter(s); font-family:"Bodoni Moda",Didot,Georgia,serif; font-size:1.5rem;
+  color:var(--gilt); line-height:1;
+}
+.steps h3{margin-bottom:8px}
+.steps p{color:var(--text-2); font-size:.96rem}
+.steps p + p, .steps p + .code, .steps .code + p, .steps p + .tablewrap{margin-top:12px}
+@media (max-width:520px){ .steps > li{grid-template-columns:30px 1fr; gap:12px} }
+
+/* ── Code / copy ────────────────────────────────────────── */
+.code{
+  position:relative; border:1px solid var(--line); background:var(--panel-2);
+  font-family:var(--mono); font-size:.82rem; line-height:1.7;
+}
+.code pre{margin:0; padding:15px 62px 15px 16px; overflow-x:auto; white-space:pre-wrap; word-break:break-word}
+.copy{
+  position:absolute; top:8px; right:8px; cursor:pointer;
+  font-family:Archivo,sans-serif; font-size:.6rem; letter-spacing:.14em;
+  text-transform:uppercase; font-weight:600; padding:5px 9px;
+  border:1px solid var(--line); background:var(--panel); color:var(--text-3);
+}
+.copy:hover{color:var(--text); border-color:var(--gilt)}
+
+/* ── Tables ─────────────────────────────────────────────── */
+.tablewrap{overflow-x:auto; border:1px solid var(--line); margin-top:18px}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.88rem; background:var(--panel)}
+th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+th{
+  font-size:.62rem; letter-spacing:.16em; text-transform:uppercase; color:var(--text-3);
+  font-weight:600; background:var(--panel-2); white-space:nowrap;
+}
+tr:last-child td{border-bottom:0}
+td code, p code, li code{
+  font-family:var(--mono); font-size:.82em; background:var(--panel-2);
+  border:1px solid var(--line-soft); padding:1px 5px; word-break:break-word;
+}
+.del{color:var(--stop); text-decoration:line-through}
+.add{color:var(--ok); font-weight:600}
+
+/* ── Checklist ──────────────────────────────────────────── */
+.check{list-style:none; margin:26px 0 0; padding:0; border-top:1px solid var(--line)}
+.check li{border-bottom:1px solid var(--line-soft); padding:0}
+.check label{
+  display:grid; grid-template-columns:24px 34px 1fr; gap:14px; align-items:start;
+  padding:16px 4px; cursor:pointer;
+}
+.check input{margin:4px 0 0; width:17px; height:17px; accent-color:var(--peacock); cursor:pointer}
+.check .rank{
+  font-family:"Bodoni Moda",Didot,Georgia,serif; font-size:1.15rem; color:var(--gilt); line-height:1.3;
+}
+.check .body b{display:block; font-weight:500; font-size:1rem}
+.check .body span{display:block; color:var(--text-2); font-size:.92rem; margin-top:3px}
+.check .body .where{
+  display:block; margin-top:7px; font-size:.72rem; color:var(--text-3);
+  font-family:var(--mono);
+}
+.check input:checked ~ .body b{text-decoration:line-through; color:var(--text-3)}
+.check input:checked ~ .rank{opacity:.4}
+.progress{
+  font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600;
+  color:var(--text-3); margin-top:16px;
+}
+
+/* ── Snippet pack ───────────────────────────────────────── */
+.pack{display:grid; gap:18px; margin-top:26px}
+.snip{border:1px solid var(--line); background:var(--panel)}
+.snip > summary{
+  cursor:pointer; padding:15px 18px; font-weight:500; list-style:none;
+  display:flex; align-items:center; gap:12px;
+}
+.snip > summary::-webkit-details-marker{display:none}
+.snip > summary::before{content:"+"; color:var(--gilt); font-family:var(--mono); font-size:1.1rem; width:14px}
+.snip[open] > summary::before{content:"–"}
+.snip > summary small{
+  margin-left:auto; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--text-3); font-weight:600;
+}
+.snip .inner{padding:0 18px 18px; border-top:1px solid var(--line-soft)}
+.snip .inner > * + *{margin-top:14px}
+.snip .inner p{font-size:.92rem; color:var(--text-2)}
+.field{font-size:.66rem; letter-spacing:.15em; text-transform:uppercase; color:var(--text-3); font-weight:600; margin-bottom:6px; display:block}
+
+.foot{border-top:1px solid var(--line); background:var(--panel); padding-block:30px; font-size:.85rem; color:var(--text-3)}
+.foot p + p{margin-top:8px}
+
+@media (prefers-reduced-motion:reduce){ *{transition-duration:.01ms!important; scroll-behavior:auto!important} }
+html{scroll-behavior:smooth}
+</style>
+
+<button class="theme-btn" id="tt" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <circle cx="8" cy="8" r="3.4" stroke="currentColor" stroke-width="1.3"/>
+    <path d="M8 .9v2.1M8 13v2.1M.9 8h2.1M13 8h2.1M2.9 2.9l1.5 1.5M11.6 11.6l1.5 1.5M13.1 2.9l-1.5 1.5M4.4 11.6l-1.5 1.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <p class="eyebrow">Handover &middot; marcolamberti.com</p>
+    <h1>Putting the new site live.</h1>
+    <p class="sub">Everything needed to replace the current Wix site &mdash; or, if Wix stays, everything worth changing inside it. Written for Marco and whoever helps him.</p>
+    <div class="meta">
+      <span>Domain: marcolamberti.com</span>
+      <span>Current host: Wix</span>
+      <span>DNS: ns2 / ns3.wixdns.net</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ── The constraint ─────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Read this first</p>
+    <h2 style="margin-top:10px">The new site cannot be pasted into Wix.</h2>
+    <p class="lede">This is the thing that decides everything else, so it is worth being blunt about. Wix has no way to upload a finished HTML site or edit the HTML of an existing one. Its embed tools add a box <em>inside</em> a Wix page; they do not replace the page.</p>
+
+    <div class="callout">
+      <h3>Wix's own wording</h3>
+      <p>&ldquo;None of these tools allows you to access or change the HTML of your site.&rdquo;</p>
+      <cite>Wix Help Center &mdash; <i>About Embeds and Codes on Your Site</i></cite>
+      <p>An HTML embed also renders in a sandboxed iframe, so its text is not read as part of the page for search, and it does not resize cleanly on a phone. Dropping the whole site into one embed would look worse than what is there now.</p>
+    </div>
+
+    <p class="lede" style="margin-top:26px">So there are exactly two honest routes. Pick one before doing anything else.</p>
+
+    <div class="routes">
+      <div class="route pick">
+        <span class="tag">Recommended</span>
+        <h3>Route A &mdash; Move off Wix</h3>
+        <p style="color:var(--text-2); font-size:.95rem">Publish the new site on a free static host and point marcolamberti.com at it. The Wix editor is no longer involved.</p>
+        <ul>
+          <li class="y"><span class="m">&#10003;</span><span>You get <b>exactly</b> the site that was built</span></li>
+          <li class="y"><span class="m">&#10003;</span><span>Hosting is <b>free</b>; the Wix plan can be cancelled</span></li>
+          <li class="y"><span class="m">&#10003;</span><span>Faster, and the SEO and share card work properly</span></li>
+          <li class="n"><span class="m">&times;</span><span>Marco <b>cannot edit it himself</b> through a visual editor</span></li>
+          <li class="n"><span class="m">&times;</span><span>~30 minutes of setup, plus up to 48h for DNS</span></li>
+        </ul>
+      </div>
+      <div class="route">
+        <span class="tag">Fallback</span>
+        <h3>Route B &mdash; Rebuild inside Wix</h3>
+        <p style="color:var(--text-2); font-size:.95rem">Keep Wix, and use the new site as a design brief: rebuild it page by page in the Wix editor and fix the settings that are wrong.</p>
+        <ul>
+          <li class="y"><span class="m">&#10003;</span><span>Marco keeps a visual editor he already knows</span></li>
+          <li class="y"><span class="m">&#10003;</span><span>Most of the value is still reachable &mdash; see the checklist</span></li>
+          <li class="n"><span class="m">&times;</span><span>Wix <b>cannot</b> reproduce the layout exactly</span></li>
+          <li class="n"><span class="m">&times;</span><span>Several hours of manual work in the editor</span></li>
+          <li class="n"><span class="m">&times;</span><span>The Wix plan keeps billing</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top:26px">
+      <h3>How to choose</h3>
+      <p>The only real argument for Route B is <b>&ldquo;Marco needs to update it himself.&rdquo;</b> Worth testing that honestly: the DNS zone for this domain was last set up in 2018, and the site still lists work photographed on an iPhone 5s. If it has not been edited in years, the visual editor is a cost being paid for a benefit nobody uses.</p>
+      <p>If updates are genuinely wanted, Route A still allows them &mdash; they just go through whoever holds the files, not through Marco.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Route A ────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Route A</p>
+    <h2 style="margin-top:10px">Publishing the new site</h2>
+    <p class="lede">About thirty minutes of work, then a wait for DNS. Nothing here costs money. Do not cancel the Wix plan until the last step &mdash; the old site should stay up until the new one is confirmed live.</p>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Get the files</h3>
+          <p>The finished site is the <code>site/</code> folder in the repository, on the branch <code>claude/marcolamberti-website-optimization-if7xd5</code>. It contains <code>index.html</code>, an <code>assets/</code> folder with the artwork, <code>robots.txt</code> and <code>sitemap.xml</code>. That folder is the entire website &mdash; there is nothing to install or compile.</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Put it on a host</h3>
+          <p>The simplest route needs no account setup or command line: open <a href="https://app.netlify.com/drop">app.netlify.com/drop</a> and drag the <code>site</code> folder onto the page. It publishes immediately at a temporary address like <code>ml-art-9f2c.netlify.app</code>.</p>
+          <p>Check that address on a phone and a laptop before going any further. Cloudflare Pages and GitHub Pages work equally well if there is a preference.</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Note the site's Netlify name</h3>
+          <p>In Netlify, rename the site to something tidy (Site configuration &rarr; Change site name), for example <code>marcolamberti</code>, giving <code>marcolamberti.netlify.app</code>. The DNS step needs this exact name.</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Point the domain</h3>
+          <p>Wix runs the DNS for this domain and <b>does not permit external nameservers</b>, so the records are edited in place at Wix. In the Wix account: <b>Domains</b> &rarr; the <b>Domain Actions</b> icon next to marcolamberti.com &rarr; <b>Manage DNS Records</b>.</p>
+          <div class="tablewrap">
+            <table>
+              <thead><tr><th>Type</th><th>Host</th><th>Remove (current)</th><th>Add (new)</th></tr></thead>
+              <tbody>
+                <tr><td>A</td><td><code>@</code></td><td class="del">185.230.63.107<br>185.230.63.171<br>185.230.63.186</td><td class="add">75.2.60.5</td></tr>
+                <tr><td>CNAME</td><td><code>www</code></td><td class="del">cdn1.wixdns.net</td><td class="add">marcolamberti.netlify.app</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Delete the old records after adding the new ones, or they will conflict. An apex domain cannot use a CNAME, which is why <code>@</code> takes an A record and only <code>www</code> takes a CNAME.</p>
+          <p><b>Email is safe:</b> this domain currently has no MX records at all, so there is no mailbox to break. (Marco's address is a Yahoo one, which is a separate matter &mdash; see the last section.)</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Add the domain in Netlify and wait</h3>
+          <p>In Netlify: <b>Domain management</b> &rarr; <b>Add a domain</b> &rarr; <code>marcolamberti.com</code>. Netlify will show &ldquo;Awaiting External DNS&rdquo; until the records propagate &mdash; usually under an hour, occasionally up to 48. The HTTPS certificate is then issued automatically.</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Confirm, then cancel Wix</h3>
+          <p>Once <code>https://marcolamberti.com</code> and <code>https://www.marcolamberti.com</code> both load the new site with a padlock, the Wix Premium plan can be cancelled.</p>
+          <p><b>Keep the domain registration.</b> Cancelling the site plan is not the same as giving up the domain &mdash; check the renewal date and keep auto-renew on. Moving the registration to another registrar later is optional and independent of all of this.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout ok" style="margin-top:30px">
+      <h3>Rolling it back</h3>
+      <p>If anything goes wrong, put the three original A records and the <code>cdn1.wixdns.net</code> CNAME back exactly as they were in the table above. The Wix site returns once DNS propagates. Nothing in Route A deletes the Wix site itself.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Route B ────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Route B</p>
+    <h2 style="margin-top:10px">If Wix stays, fix these</h2>
+    <p class="lede">Ordered by how much each one is costing right now. The first item is worth more than the other nine combined. Everything here is doable inside the Wix editor &mdash; and worth doing even if Route A happens later, since the text carries over.</p>
+
+    <ul class="check" id="checklist">
+      <li><label>
+        <input type="checkbox" data-k="c1">
+        <span class="rank">01</span>
+        <span class="body"><b>Put artwork on the homepage</b>
+          <span>The homepage is currently a green background, a logo and a menu. A visitor who came to see paintings sees none. Put the peacock mural full-width at the top, a one-line description underneath, and six to eight pieces below that.</span>
+          <span class="where">Wix Editor &rarr; Home page</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c2">
+        <span class="rank">02</span>
+        <span class="body"><b>Rename the <code>/blank</code> page</b>
+          <span>The murals gallery &mdash; the most commercially valuable page &mdash; lives at marcolamberti.com/blank. Change the slug to <code>murals-faux-finish</code> and let Wix add the redirect when it offers.</span>
+          <span class="where">Pages menu &rarr; page settings &rarr; Page URL</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c3">
+        <span class="rank">03</span>
+        <span class="body"><b>Write the SEO title and description for every page</b>
+          <span>All five pages are titled &ldquo;PAGE&nbsp;|&nbsp;marcolambertiart&rdquo; with no description at all. Exact text to paste is in the snippet pack below.</span>
+          <span class="where">Page settings &rarr; SEO Basics &rarr; Title tag / Meta description</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c4">
+        <span class="rank">04</span>
+        <span class="body"><b>Add alt text to every image</b>
+          <span>Every image on the site has an empty alt attribute. This is both an accessibility problem and the reason none of the artwork appears in image search. Text for all fifteen is in the snippet pack.</span>
+          <span class="where">Click image &rarr; Settings &rarr; What's in the image?</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c5">
+        <span class="rank">05</span>
+        <span class="body"><b>Add a call to action</b>
+          <span>There is no button anywhere asking anyone to get in touch. Add &ldquo;Discuss a commission&rdquo; to the homepage and the end of each gallery, linked to <code>tel:+13105946217</code> and <code>mailto:artnmotion54@yahoo.com</code>.</span>
+          <span class="where">Add &rarr; Button &rarr; Link &rarr; Web address</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c6">
+        <span class="rank">06</span>
+        <span class="body"><b>Say &ldquo;Los Angeles&rdquo; somewhere</b>
+          <span>The phone number is a 310, but the words Los Angeles appear nowhere on the site. Nobody searching for a muralist in LA can find it. Fill in the business address and phone so Wix publishes local business data.</span>
+          <span class="where">Dashboard &rarr; Settings &rarr; Business Info</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c7">
+        <span class="rank">07</span>
+        <span class="body"><b>Set a social share image</b>
+          <span>Texting the link today produces a blank grey card. Upload <code>site/assets/og.jpg</code> from the new build &mdash; it is already sized 1200&times;630.</span>
+          <span class="where">Page settings &rarr; Social Share</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c8">
+        <span class="rank">08</span>
+        <span class="body"><b>Fix or remove the &ldquo;Show More&rdquo; button</b>
+          <span>The button under the murals gallery does nothing when clicked &mdash; there are no further images behind it. Either load more work into the gallery or delete the button.</span>
+          <span class="where">Murals page &rarr; gallery settings</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c9">
+        <span class="rank">09</span>
+        <span class="body"><b>Replace the About text</b>
+          <span>The current biography reads &ldquo;son of a nobel man&rdquo;, &ldquo;a more traditional carrier&rdquo;, &ldquo;he blossoms as a sculpture&rdquo;, and misspells Danny Elfman as &ldquo;Danny Helfman&rdquo;. For a trade selling five-figure craftsmanship, that is expensive. Corrected text is in the snippet pack.</span>
+          <span class="where">About page &rarr; text box</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c10">
+        <span class="rank">10</span>
+        <span class="body"><b>Re-upload the images at full size</b>
+          <span>Several pieces exist online only as roughly 300-pixel scans. If the original photographs or negatives still exist, re-scan and re-upload them. This matters more than anything else on this list except the homepage.</span>
+          <span class="where">Media Manager</span></span>
+      </label></li>
+    </ul>
+    <p class="progress" id="progress">0 of 10 done</p>
+  </div>
+</section>
+
+<!-- ── Snippet pack ───────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Copy &amp; paste</p>
+    <h2 style="margin-top:10px">The text, ready to use</h2>
+    <p class="lede">Written for the new site, but all of it pastes straight into Wix too. Nothing here was invented &mdash; the biography is Marco's own account, corrected; the captions describe what is visible in each photograph.</p>
+
+    <div class="pack">
+
+      <details class="snip" open>
+        <summary>Page titles &amp; meta descriptions <small>Route B &mdash; item 03</small></summary>
+        <div class="inner">
+          <div>
+            <span class="field">Home &mdash; title tag</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Marco Lamberti — Muralist &amp; Decorative Painter, Los Angeles</pre></div>
+          </div>
+          <div>
+            <span class="field">Home &mdash; meta description</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Italian-trained muralist and decorative painter in Los Angeles. Trompe-l'œil, frescoed ceilings, Venetian plaster, gilding, faux marble and bas-relief for private residences. Commissions across Southern California.</pre></div>
+          </div>
+          <div>
+            <span class="field">Murals page &mdash; title tag</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Murals, Trompe-l'œil &amp; Faux Finish — Marco Lamberti, Los Angeles</pre></div>
+          </div>
+          <div>
+            <span class="field">Murals page &mdash; meta description</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Hand-painted murals, trompe-l'œil architecture, frescoed ceilings, Venetian plaster, faux marble and bas-relief for Los Angeles homes. Four decades of Italian-trained decorative painting.</pre></div>
+          </div>
+          <div>
+            <span class="field">Paintings page &mdash; title tag</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Paintings &amp; Watercolours — Marco Lamberti</pre></div>
+          </div>
+          <div>
+            <span class="field">Paintings page &mdash; meta description</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Studio paintings and watercolours by Marco Lamberti, including the Vignette Romane series of Renaissance street scenes. Available for private sale.</pre></div>
+          </div>
+          <div>
+            <span class="field">About page &mdash; title tag</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>About Marco Lamberti — From Mantova to Los Angeles</pre></div>
+          </div>
+          <div>
+            <span class="field">Contact page &mdash; title tag</span>
+            <div class="code"><button class="copy" type="button">Copy</button><pre>Contact — Commission a Mural or Decorative Finish in Los Angeles</pre></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="snip">
+        <summary>Alt text for all fifteen images <small>Route B &mdash; item 04</small></summary>
+        <div class="inner">
+          <p>One line per image. Describe what is in the photograph, not the file name.</p>
+          <div class="code"><button class="copy" type="button">Copy all</button><pre>Peacock Entry — Entrance hall painted as an open loggia with fluted pilasters, a distant garden, and a peacock on the door pediment.
+
+Garden Loggia — Mural of a formal garden with clipped hedges and cypress seen through a painted arch and balustrade.
+
+Ceiling with Figures — Ceiling painted with a cloud of figures rising, in the Baroque manner.
+
+Rinascimento Doors — Pair of pocket doors painted with four Renaissance grotesque panels in ochre and grey.
+
+Rose Strapwork Ceiling — Ceiling painted with interlacing strapwork radiating from a central rosette, with roses at the corners.
+
+Limewashed Dining Room — Dining room with tall doors and panelling finished to look like pale, aged limewashed oak.
+
+Two-Storey Living Room — Double-height living room with warm, mottled golden plaster walls and a chandelier.
+
+Veined Plaster — Close detail of a warm ochre plaster wall with a fine hand-drawn vein running across it.
+
+Patinated Urn — Large garden urn finished with a chalky, weathered white patina, standing outdoors.
+
+Urns in Progress — Several large planters at different stages of a weathered paint finish, standing outdoors in dappled light.
+
+Vignette Romane I — Watercolour of a dark horned carnival float towering over a crowd in a pale city square.
+
+Vignette Romane III — Watercolour of a crowded tavern scene beneath a Corinthian arch, with a VIVA BACCO banner.
+
+Vignette Romane IV — Watercolour of a Renaissance ball game across a piazza with spectators on balconies.
+
+Egyptian Trip — Painting of four stylised faces gathered beneath a single crimson cloak against a rose ground.
+
+I Miei Pensieri — Pointillist painting of reclining figures in ochre and gold with watching silhouettes behind.</pre></div>
+        </div>
+      </details>
+
+      <details class="snip">
+        <summary>Corrected biography <small>Route B &mdash; item 09</small></summary>
+        <div class="inner">
+          <p>Same facts as the current About page, with the grammar and the spelling of Danny Elfman's name fixed.</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>Marco Zanardi Lamberti was born in Mantova, a città d'arte in Lombardy, and grew up surrounded by architecture, painting and sculpture. He enrolled at art school in Verona, where he worked mainly in sculpture and his teachers took to calling him Maestro.
+
+The third of four sons of a nobleman, he was expected to become an architect or an engineer. His father did not approve of art school. His mother did — and sent him south to stay with her brother on Ischia, in the bay of Naples, where he could keep studying. He took his degree there in fine arts.
+
+He worked next as a painter-decorator and design consultant in Locarno and Paris. In the 1980s he moved to Los Angeles, which has been home ever since.
+
+Selected private clients include Tom Cruise, the composer Danny Elfman, Fabio Lanzoni and Kurt Rambis.</pre></div>
+        </div>
+      </details>
+
+      <details class="snip">
+        <summary>Service list for the murals page <small>Helps local search</small></summary>
+        <div class="inner">
+          <p>These are the terms interior designers and architects actually put on a specification. Having them as text on the page is what makes the site findable.</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>Trompe-l'œil murals · Frescoed and painted ceilings · Grisaille panels and ornament · Venetian plaster and marmorino · Strié and glazed wall finishes · Gilding and gold leaf · Faux marble and faux stone · Faux wood and limewashed finishes · Bas-relief ornament · Patina and aged finishes on doors, panelling and garden objects
+
+Serving Los Angeles and Southern California — the Westside, the Valley, the South Bay and beyond. Working directly with homeowners and alongside interior designers and architects.</pre></div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── What no website fixes ──────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Honest limits</p>
+    <h2 style="margin-top:10px">What a new website cannot fix</h2>
+    <p class="lede">Worth saying plainly, because it would be easy to look at a better-looking site and think the job is done.</p>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Gap</th><th>Why it matters</th><th>What it takes</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Photography</b></td>
+            <td>Several pieces survive only as ~300&nbsp;pixel scans of old prints, and two are iPhone 5s snapshots of urns in a driveway. No design work fixes a bad photograph.</td>
+            <td>Half a day with a photographer in three or four finished rooms. The highest-return thing on this page.</td>
+          </tr>
+          <tr>
+            <td><b>No testimonials</b></td>
+            <td>Nothing on the site is said by anyone other than Marco. Three sentences from a designer who has hired him would outweigh the celebrity list.</td>
+            <td>Two phone calls and permission to quote.</td>
+          </tr>
+          <tr>
+            <td><b>No pricing signal</b></td>
+            <td>Not even &ldquo;commissions typically start at&hellip;&rdquo;. Visitors self-select on price regardless; without a signal, the wrong ones call and the right ones hesitate.</td>
+            <td>One sentence Marco is comfortable with.</td>
+          </tr>
+          <tr>
+            <td><b>Yahoo email address</b></td>
+            <td><code>artnmotion54@yahoo.com</code> is fine after twenty years of word of mouth, weak on a page quoting five figures. The domain has no mail set up at all today.</td>
+            <td><code>marco@marcolamberti.com</code>, a few dollars a month.</td>
+          </tr>
+          <tr>
+            <td><b>Unverified client names</b></td>
+            <td>Tom Cruise, Danny Elfman, Fabio Lanzoni and Kurt Rambis are reproduced from Marco's own About page. High-end residential work often carries a confidentiality clause.</td>
+            <td>Confirm with Marco before this goes live. This one is a liability, not a nicety.</td>
+          </tr>
+          <tr>
+            <td><b>No dates or locations</b></td>
+            <td>&ldquo;Beverly Hills, 2004&rdquo; under a piece does more for credibility than any amount of styling.</td>
+            <td>An hour going through the work with Marco.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Prepared for Marco Lamberti &middot; marcolamberti.com</p>
+    <p>DNS and hosting details were read from the live domain and from Wix's and Netlify's current documentation. Verify the records once more before changing them &mdash; DNS is the one step here that takes the site offline if it is got wrong.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Theme */
+  var root = document.documentElement;
+  try {
+    var s = localStorage.getItem('ml-theme');
+    if (s === 'dark' || s === 'light') root.setAttribute('data-theme', s);
+  } catch (e) { /* system theme stands */ }
+
+  document.getElementById('tt').addEventListener('click', function () {
+    var cur = root.getAttribute('data-theme');
+    var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var next = (cur ? cur === 'dark' : sysDark) ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('ml-theme', next); } catch (e) { /* not persisted */ }
+  });
+
+  /* Copy buttons */
+  Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (b) {
+    b.addEventListener('click', function () {
+      var pre = b.parentNode.querySelector('pre');
+      if (!pre) return;
+      var label = b.textContent;
+      var restore = function (msg) {
+        b.textContent = msg;
+        setTimeout(function () { b.textContent = label; }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.textContent).then(
+          function () { restore('Copied'); },
+          function () { restore('Select it'); }
+        );
+      } else {
+        var r = document.createRange();
+        r.selectNodeContents(pre);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(r);
+        restore('Selected');
+      }
+    });
+  });
+
+  /* Checklist — remembered per reader, in their own browser only */
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#checklist input'));
+  var out = document.getElementById('progress');
+
+  function tally() {
+    var n = boxes.filter(function (b) { return b.checked; }).length;
+    out.textContent = n + ' of ' + boxes.length + ' done';
+  }
+
+  boxes.forEach(function (b) {
+    var key = 'ml-hand-' + b.getAttribute('data-k');
+    try { if (localStorage.getItem(key) === '1') b.checked = true; } catch (e) { /* unchecked */ }
+    b.addEventListener('change', function () {
+      try { localStorage.setItem(key, b.checked ? '1' : '0'); } catch (e) { /* not persisted */ }
+      tally();
+    });
+  });
+  tally();
+})();
+</script>
