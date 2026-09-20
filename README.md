@@ -82,10 +82,9 @@ reduced motion, and only while on screen. If autoplay is refused the poster
 holds and the button offers play.
 
 Four more films sit in the gallery's "Recent work" group: polished plaster on a
-curved commercial wall (Beverly Hills, 2026), a meadow band painted round a
-bathroom (location still unconfirmed), a blossom tree up a staircase (Pacific
-Palisades, 2026) and a restaurant's wood and textured walls (Manhattan Beach,
-2026).
+curved commercial wall (Beverly Hills), a meadow band painted round a bathroom
+(Pacific Palisades), a blossom tree up a staircase (Pacific Palisades) and a
+restaurant's wood and textured walls (Manhattan Beach) — all four from 2026.
 
 The Swiss fresco is kept for what it proves about the hand, not as a claim of
 availability: Marco says it was a one-off and he wants the work kept in
@@ -149,8 +148,10 @@ These need Marco, not code:
    under B&P §7031 an unlicensed contractor cannot sue to collect payment and
    can be ordered to refund everything already paid. Nothing on the site claims
    either credential. This is the biggest open risk and it is not a web problem.
-6. **No dates or locations per project.** "Beverly Hills, 2004" on each piece
-   would add a great deal of credibility.
+6. **Dates and locations on the older work.** The 2026 pieces, the Swiss fresco
+   and two older murals are placed and dated. The remaining twelve — the
+   historical murals, finishes and studio paintings — still carry no year or
+   city, which is the last credibility gap in the gallery.
 7. **No contact form.** The page uses `tel:` and `mailto:` deliberately — a
    static site cannot process a form. If a form is wanted, a hosted endpoint
    (Formspree, Netlify Forms) can be added in the build.
