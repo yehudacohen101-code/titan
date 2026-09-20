@@ -116,11 +116,12 @@ const jsonLd = {
     {
       '@type': 'VideoObject',
       '@id': `${SITE.origin}/#fresco-film`,
-      name: 'Marco Lamberti painting a Madonna fresco',
+      name: 'Marco Lamberti painting a Madonna on a wall in Switzerland',
       description:
         'Marco Lamberti painting a Madonna on the exterior wall of a stone ' +
-        'building — freehand, straight onto the render, from a plank laid ' +
-        'across two trestles. No projector and no transfer.',
+        'building in Switzerland — freehand, straight onto the render, from a ' +
+        'plank laid across two trestles. No projector and no transfer.',
+      contentLocation: { '@type': 'Country', name: 'Switzerland' },
       thumbnailUrl: `${SITE.origin}/assets/marco-fresco-poster.webp`,
       contentUrl: `${SITE.origin}/assets/marco-fresco.mp4`,
       encodingFormat: 'video/mp4',
