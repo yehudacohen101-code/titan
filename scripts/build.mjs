@@ -26,8 +26,9 @@ const SITE = {
     'Marco Lamberti — Muralist & Decorative Painter, Los Angeles',
   description:
     'Italian-trained muralist and decorative painter in Los Angeles. ' +
-    'Trompe-l’œil, frescoed ceilings, Venetian plaster, gilding, faux marble ' +
-    'and bas-relief for private residences. Commissions across Southern California.',
+    'Trompe-l’œil, painted ceilings, Venetian plaster, gilding, faux marble and ' +
+    'bas-relief for homes, restaurants and commercial interiors. Restoration of ' +
+    'existing decorative work. Over 150 projects across Southern California.',
   phone: '+1-310-594-6217',
   phoneDisplay: '310 594-6217',
   email: 'artnmotion54@yahoo.com',
@@ -61,7 +62,11 @@ const jsonLd = {
       },
       areaServed: [
         { '@type': 'City', name: 'Los Angeles' },
+        { '@type': 'City', name: 'Beverly Hills' },
+        { '@type': 'City', name: 'Malibu' },
+        { '@type': 'City', name: 'San Diego' },
         { '@type': 'AdministrativeArea', name: 'Los Angeles County' },
+        { '@type': 'AdministrativeArea', name: 'Orange County' },
         { '@type': 'AdministrativeArea', name: 'Southern California' }
       ],
       founder: { '@id': `${SITE.origin}/#marco` },
@@ -74,7 +79,8 @@ const jsonLd = {
         'Gilding',
         'Faux marble and faux stone',
         'Bas-relief',
-        'Decorative patina and aged finishes'
+        'Decorative patina and aged finishes',
+        'Restoration of decorative painting and murals'
       ],
       makesOffer: [
         'Hand-painted murals',
@@ -84,7 +90,9 @@ const jsonLd = {
         'Faux marble and faux wood',
         'Gilding and gold leaf',
         'Bas-relief ornament',
-        'Aged and patinated finishes on doors, panelling and garden objects'
+        'Aged and patinated finishes on doors, panelling and garden objects',
+        'Restoration of existing murals and decorative finishes',
+        'Decorative painting for restaurants and commercial interiors'
       ].map((name) => ({
         '@type': 'Offer',
         itemOffered: { '@type': 'Service', name, serviceType: name }

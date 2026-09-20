@@ -49,7 +49,7 @@ npx http-server site -p 8080
 | Homepage showed a green background, a logo and a nav bar — no artwork | Full-bleed hero on the strongest mural, with a positioning line and two CTAs |
 | No meta description; murals page lived at `/blank` | Full `<head>`: title, description, canonical, OG/Twitter cards, JSON-LD |
 | "Los Angeles" appeared nowhere, despite a 310 number | Locality in the copy, `LocalBusiness` schema, `areaServed`, `geo` tags |
-| Celebrity clients buried in paragraph 3 of the About page | Their own section, and Danny Elfman's name spelled correctly |
+| Celebrity clients named in paragraph 3 of the About page | Removed — Marco confirmed he has no permission to use those names |
 | Captions read `IMG_5219`, `faux finish on walls 1` | Every piece titled, categorised and described by technique and room |
 | Work split into "Paintings" / "Faux finish" — with murals in both | Regrouped by what a client actually commissions: murals, finishes, studio |
 | No call to action anywhere | `tel:` and `mailto:` with a pre-filled enquiry template, copy-to-clipboard |
@@ -78,14 +78,18 @@ These need Marco, not code:
    than anything in this repo.
 2. **No testimonials.** None were invented. Three sentences from a designer he
    has worked with would carry more weight than the client list.
-3. **No pricing or scope signal.** Not even a "commissions typically start at…".
-   Visitors self-select on price whether or not you help them.
+3. **Pricing looks low.** Marco prices at $500/day internally and quotes a fixed
+   total. Specialty finish work in this market runs ~$537–963/day, and
+   trompe-l'œil is commonly $35–150/sq ft. The site deliberately publishes no
+   day rate — quoting per job is right — but the number behind it should rise.
 4. **`artnmotion54@yahoo.com`.** Fine for twenty years of word of mouth; a weak
    signal on a page quoting five figures. `marco@marcolamberti.com` costs a few
    dollars a month.
-5. **Client names are unverified.** They are reproduced from Marco's own About
-   page. High-end residential work often carries an NDA — worth confirming
-   before this goes live.
+5. **No contractor's licence, no liability insurance.** Marco holds neither. In
+   California a C-33 is required once labour and materials reach $1,000, and
+   under B&P §7031 an unlicensed contractor cannot sue to collect payment and
+   can be ordered to refund everything already paid. Nothing on the site claims
+   either credential. This is the biggest open risk and it is not a web problem.
 6. **No dates or locations per project.** "Beverly Hills, 2004" on each piece
    would add a great deal of credibility.
 7. **No contact form.** The page uses `tel:` and `mailto:` deliberately — a
