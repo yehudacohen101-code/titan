@@ -356,7 +356,49 @@ h1,h2,h3,.display{
   padding-block:4px; border-bottom:1px solid transparent;
 }
 .nav a:hover{color:var(--text); border-bottom-color:var(--gilt)}
-@media (max-width:860px){ .nav{display:none} }
+@media (max-width:860px){
+  /* On a phone the header stops being sticky and scrolls away: a two-row bar
+     pinned to the top would eat an eighth of the screen on a portfolio whose
+     whole job is showing pictures. The call-to-action moves to a bottom bar
+     instead, which is within thumb reach and costs no vertical space. */
+  .site-head{position:static}
+  .head-in{flex-wrap:wrap; gap:6px 14px; padding-block:8px; min-height:0}
+  .wordmark{font-size:.92rem; letter-spacing:.13em}
+  .nav{
+    order:3; width:100%; gap:16px; overflow-x:auto; scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    margin-inline:-20px; padding-inline:20px;
+  }
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{white-space:nowrap; font-size:.72rem; padding-block:11px}   /* 44px tap target */
+  /* The fixed bottom bar already carries Call and Email, so the header
+     button is redundant on a phone and costs a whole row. */
+  .head-in > .btn{display:none}
+  .theme-btn{width:42px; height:42px}
+}
+@media (max-width:600px){ .wordmark span{display:none} }
+
+/* ── Bottom action bar (phones only) ─────────────────────────
+   Always within thumb reach, and it never covers the last section
+   because body reserves the space. */
+.callbar{display:none}
+@media (max-width:860px){
+  .callbar{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    position:fixed; left:0; right:0; bottom:0; z-index:45;
+    background:var(--line); border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom, 0px);
+  }
+  .callbar a{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    min-height:52px; text-decoration:none; font-weight:600;
+    font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+    background:var(--surface); color:var(--text);
+  }
+  .callbar a.primary{background:var(--peacock-deep); color:#fff}
+  body{padding-bottom:calc(53px + env(safe-area-inset-bottom, 0px))}
+  .lb{padding-bottom:0}
+}
 
 .btn{
   display:inline-flex; align-items:center; gap:8px;
@@ -412,6 +454,7 @@ h1,h2,h3,.display{
       linear-gradient(90deg, rgba(8,16,15,.8) 0%, rgba(8,16,15,.62) 60%, rgba(8,16,15,.34) 100%);
   }
   .hero-body{padding-block:80px 38px}
+  .hero .eyebrow{letter-spacing:.14em; font-size:.62rem; hyphens:none}
 }
 .hero h1 em{font-style:italic; color:var(--gilt)}
 .hero .eyebrow{color:#c3cec7}
@@ -568,6 +611,32 @@ section{padding-block:clamp(56px, 8vw, 96px)}
   backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
 }
 
+/* ── Video tiles in the grid ─────────────────────────────────
+   Tiles are poster images only. Nothing downloads a video until the
+   viewer opens one, which keeps the page light on a phone. */
+.piece[data-video] .frame::before{
+  content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg, rgba(8,16,15,0) 45%, rgba(8,16,15,.5) 100%);
+  pointer-events:none;
+}
+.play-badge{
+  position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  z-index:2; width:54px; height:54px; display:grid; place-items:center;
+  border:1px solid rgba(240,237,227,.6); background:rgba(10,18,16,.5);
+  color:#f2efe5; border-radius:50%; pointer-events:none;
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+  transition:background .2s ease, border-color .2s ease;
+}
+.piece:hover .play-badge{background:rgba(10,18,16,.72); border-color:var(--gilt)}
+.piece[data-video] .frame{cursor:pointer}
+.dur{
+  position:absolute; right:8px; bottom:8px; z-index:2;
+  font-size:.58rem; letter-spacing:.1em; font-weight:600; font-variant-numeric:tabular-nums;
+  background:rgba(10,18,16,.6); color:#e8e4d8; padding:3px 7px;
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+.lb-stage video{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; box-shadow:var(--shadow); background:#000}
+
 /* ── Story ──────────────────────────────────────────────────── */
 .story{background:var(--surface); border-block:1px solid var(--line)}
 .story-in{display:grid; grid-template-columns:minmax(0,1fr) 340px; gap:56px; align-items:start}
@@ -647,13 +716,17 @@ section{padding-block:clamp(56px, 8vw, 96px)}
 
 /* ── Lightbox ───────────────────────────────────────────────── */
 .lb{
-  position:fixed; inset:0; z-index:90; display:grid; grid-template-rows:1fr auto;
-  background:rgba(7,13,12,.96); padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+  position:fixed; inset:0; z-index:90; display:grid;
+  /* minmax(0,1fr), not 1fr: a plain 1fr keeps an automatic content minimum, so a
+     tall portrait video stretches the row and pushes the caption off-screen. */
+  grid-template-rows:minmax(0,1fr) auto;
+  overflow:hidden;
+  background:rgba(7,13,12,.97); padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
 }
 .lb[hidden]{display:none!important}
-.lb-stage{display:grid; place-items:center; padding:52px 16px 8px; min-height:0}
-.lb-stage img{max-width:100%; max-height:100%; width:auto; object-fit:contain; box-shadow:var(--shadow)}
-.lb-bar{padding:14px 16px 22px; text-align:center; border-top:1px solid #23302c}
+.lb-stage{display:grid; place-items:center; padding:52px 16px 8px; min-height:0; overflow:hidden}
+.lb-stage img{max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; box-shadow:var(--shadow)}
+.lb-bar{padding:14px 16px 22px; text-align:center; border-top:1px solid #23302c; max-height:36vh; overflow-y:auto}
 .lb-bar .t{font-family:"Bodoni Moda",Didot,Georgia,serif; font-size:1.2rem; color:#f0ece0; display:block}
 .lb-bar .m{font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gilt); margin-top:6px; display:block; font-weight:600}
 .lb-bar .d{font-size:.9rem; color:#a9b5ae; margin:9px auto 0; max-width:62ch}
@@ -670,6 +743,29 @@ section{padding-block:clamp(56px, 8vw, 96px)}
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important}
+}
+/* ── Touch sizing ────────────────────────────────────────────
+   Last block in the sheet so these win over the component rules above.
+   Everything tappable clears 44px, the size a fingertip actually needs. */
+@media (max-width:860px){
+  .nav a{min-height:44px; display:inline-flex; align-items:center; padding-block:0}
+  .wordmark{min-height:44px; display:inline-flex; align-items:center}
+  .theme-btn{width:44px; height:44px}
+  .filters button{min-height:44px; display:inline-flex; align-items:center}
+  .lines li{padding-block:8px}
+  .lines a{display:inline-flex; align-items:center; min-height:44px}
+  .copy{min-height:40px; display:inline-flex; align-items:center}
+  .foot-in nav{width:100%; gap:0; flex-direction:column; margin-left:0}
+  .foot-in nav a{min-height:44px; display:flex; align-items:center; border-top:1px solid var(--line-soft)}
+  .hero-cta .btn, .contact .btn{min-height:46px}
+  .lb-close{width:46px; height:46px; top:10px; right:10px}
+  .lb-nav{width:50px; height:50px}
+  .lb-prev{left:8px} .lb-next{right:8px}
+  .lb-stage{padding:60px 8px 6px}
+  .lb-bar{padding:12px 14px 18px}
+  .lb-bar .d{font-size:.86rem}
+  .film-toggle{width:46px; height:46px}
+  .piece{cursor:default}
 }
 html{scroll-behavior:smooth}
 </style>
@@ -814,14 +910,114 @@ html{scroll-behavior:smooth}
     <div class="sec-head">
       <p class="eyebrow">02 &mdash; Selected work</p>
     </div>
-    <h2>Fifteen pieces from four decades.</h2>
-    <p class="lede">Private homes, restaurants and commercial interiors across Southern California, plus studio work shown for the drawing rather than for sale. Select any piece to see it larger.</p>
+    <h2>Twenty pieces, four decades, five of them filmed.</h2>
+    <p class="lede">Private homes, restaurants and commercial interiors across Southern California, plus studio work shown for the drawing rather than for sale. Select any piece to see it larger; the films play on tap and are not downloaded until you ask for one.</p>
 
     <div class="filters" role="group" aria-label="Filter work by type">
       <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="recent" aria-pressed="false">Recent work</button>
       <button type="button" data-filter="murals" aria-pressed="false">Murals &amp; trompe-l'&oelig;il</button>
       <button type="button" data-filter="finishes" aria-pressed="false">Decorative finishes</button>
       <button type="button" data-filter="studio" aria-pressed="false">Studio paintings</button>
+    </div>
+
+    <!-- Recent work -->
+    <div class="group" data-group="recent">
+      <div class="group-head">
+        <h3>Recent work</h3>
+        <span class="count">Four films &middot; One photograph</span>
+      </div>
+      <div class="grid">
+
+        <figure class="piece" tabindex="0" role="button" data-video="assets/marco-meadow.mp4"
+          data-img="assets/marco-meadow-poster.webp"
+          data-title="Meadow Bathroom"
+          data-meta="Hand-painted landscape · Bathroom · Film, 18s"
+          data-desc="A dry hillside of grasses, cypress and orange wildflowers painted as a continuous band right around a bathroom, wrapping the corners and running behind the tub. It meets the real hills through the window — the painted landscape and the actual one line up.">
+          <div class="frame">
+            <img src="assets/marco-meadow-poster.webp" width="576" height="1024" loading="lazy" decoding="async"
+                 alt="Bathroom with a painted band of green meadow, cypress and orange wildflowers running around the walls behind a freestanding tub.">
+            <span class="play-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.2 13 8l-9 5.8Z"/></svg></span>
+            <span class="dur">0:18</span>
+          </div>
+          <figcaption>
+            <span class="t">Meadow Bathroom</span>
+            <span class="meta">Hand-painted landscape &middot; Film</span>
+            <span class="d">A band of meadow carried around every wall, meeting the real hills through the window.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="piece" tabindex="0" role="button" data-video="assets/marco-staircase.mp4"
+          data-img="assets/marco-staircase-poster.webp"
+          data-title="Blossom Staircase"
+          data-meta="Hand-painted tree · Stair hall · Film, 18s"
+          data-desc="A blossoming tree drawn up the wall of a curved staircase, the branches following the rise of the handrail. On the facing wall, a deep blue glazed finish laid on in soft cloudy passes.">
+          <div class="frame">
+            <img src="assets/marco-staircase-poster.webp" width="576" height="1024" loading="lazy" decoding="async"
+                 alt="Curved staircase with a hand-painted blossoming tree climbing the wall beside it.">
+            <span class="play-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.2 13 8l-9 5.8Z"/></svg></span>
+            <span class="dur">0:18</span>
+          </div>
+          <figcaption>
+            <span class="t">Blossom Staircase</span>
+            <span class="meta">Hand-painted tree &middot; Film</span>
+            <span class="d">Branches drawn to follow the rise of the handrail; deep blue glaze on the facing wall.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="piece" tabindex="0" role="button"
+          data-img="assets/staircase-blossom.webp"
+          data-title="Blossom Staircase, finished"
+          data-meta="Hand-painted tree · Stair hall · Photograph"
+          data-desc="The same staircase, finished and lit. The branches are drawn thin enough to read as drawing rather than decoration, and stop short of the ceiling so the wall still breathes.">
+          <div class="frame">
+            <img src="assets/staircase-blossom.webp" width="576" height="1024" loading="lazy" decoding="async"
+                 alt="Finished staircase wall with a delicate hand-painted blossoming tree beside the banister.">
+          </div>
+          <figcaption>
+            <span class="t">Blossom Staircase, finished</span>
+            <span class="meta">Hand-painted tree &middot; Stair hall</span>
+            <span class="d">Drawn thin enough to read as drawing, and stopped short of the ceiling.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="piece" tabindex="0" role="button" data-video="assets/marco-plaster.mp4"
+          data-img="assets/marco-plaster-poster.webp"
+          data-title="Curved Wall in Plaster"
+          data-meta="Polished plaster · Commercial interior · Film, 18s"
+          data-desc="Plaster going onto the curved walls of a new commercial interior, worked with the trowel in long passes that follow the curve. Blue tape at the ceiling line, arched niches and cove lighting waiting behind him.">
+          <div class="frame">
+            <img src="assets/marco-plaster-poster.webp" width="576" height="1024" loading="lazy" decoding="async"
+                 alt="Marco Lamberti on a ladder, troweling plaster onto the curved wall of a modern commercial interior.">
+            <span class="play-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.2 13 8l-9 5.8Z"/></svg></span>
+            <span class="dur">0:18</span>
+          </div>
+          <figcaption>
+            <span class="t">Curved Wall in Plaster</span>
+            <span class="meta">Polished plaster &middot; Commercial</span>
+            <span class="d">Trowelled in long passes that follow the curve of the wall.</span>
+          </figcaption>
+        </figure>
+
+        <figure class="piece" tabindex="0" role="button" data-video="assets/marco-restaurant.mp4"
+          data-img="assets/marco-restaurant-poster.webp"
+          data-title="Restaurant Wood &amp; Walls"
+          data-meta="Wood finish and textured wall · Restaurant · Film, 7s"
+          data-desc="Two finishes in one room: the long bar front, cabinetry and benches brought to a warm, even wood tone, and the back wall in a mottled turquoise that carries the shelves. Filmed during service — the shots here are of the surfaces only.">
+          <div class="frame">
+            <img src="assets/marco-restaurant-poster.webp" width="576" height="1024" loading="lazy" decoding="async"
+                 alt="Restaurant interior: wood cabinetry and bar cladding in a warm even tone, beside a mottled turquoise wall.">
+            <span class="play-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M4 2.2 13 8l-9 5.8Z"/></svg></span>
+            <span class="dur">0:07</span>
+          </div>
+          <figcaption>
+            <span class="t">Restaurant Wood &amp; Walls</span>
+            <span class="meta">Wood finish &amp; textured wall &middot; Film</span>
+            <span class="d">Bar front, cabinetry and benches in one tone; a mottled turquoise behind the shelves.</span>
+          </figcaption>
+        </figure>
+
+      </div>
     </div>
 
     <!-- Murals -->
@@ -1184,6 +1380,11 @@ html{scroll-behavior:smooth}
 
 </main>
 
+<nav class="callbar" aria-label="Contact Marco">
+  <a class="primary" href="tel:+13105946217">Call</a>
+  <a href="mailto:artnmotion54@yahoo.com?subject=Commission%20enquiry">Email</a>
+</nav>
+
 <footer class="site-foot">
   <div class="wrap foot-in">
     <p>&copy; <span id="yr">2026</span> Marco Lamberti. All artwork shown is his own.</p>
@@ -1200,6 +1401,7 @@ html{scroll-behavior:smooth}
 <div class="lb" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Artwork viewer">
   <div class="lb-stage">
     <img id="lb-img" src="" alt="">
+    <video id="lb-video" hidden controls loop playsinline preload="none"></video>
   </div>
   <div class="lb-bar">
     <span class="t" id="lb-title"></span>
@@ -1288,6 +1490,7 @@ html{scroll-behavior:smooth}
   /* ── Lightbox ─────────────────────────────────────────────── */
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lb-img');
+  var lbVideo = document.getElementById('lb-video');
   var lbTitle = document.getElementById('lb-title');
   var lbMeta = document.getElementById('lb-meta');
   var lbDesc = document.getElementById('lb-desc');
@@ -1305,8 +1508,27 @@ html{scroll-behavior:smooth}
     if (!order.length) return;
     index = (i + order.length) % order.length;
     var p = order[index];
-    lbImg.src = p.getAttribute('data-img');
-    lbImg.alt = p.querySelector('img').alt;
+    var src = p.getAttribute('data-video');
+
+    lbVideo.pause();
+    if (src) {
+      /* preload="none" means the file is fetched now, on request, and never
+         before — a phone pays for a film only when someone opens it. */
+      lbVideo.poster = p.getAttribute('data-img');
+      if (lbVideo.getAttribute('src') !== src) lbVideo.setAttribute('src', src);
+      lbVideo.setAttribute('aria-label', p.querySelector('img').alt);
+      lbVideo.hidden = false;
+      lbImg.hidden = true;
+      lbImg.removeAttribute('src');
+      lbVideo.play().catch(function () { /* viewer can press play */ });
+    } else {
+      lbVideo.hidden = true;
+      lbVideo.removeAttribute('src');
+      lbVideo.load();
+      lbImg.hidden = false;
+      lbImg.src = p.getAttribute('data-img');
+      lbImg.alt = p.querySelector('img').alt;
+    }
     lbTitle.textContent = p.getAttribute('data-title');
     lbMeta.textContent = p.getAttribute('data-meta');
     lbDesc.textContent = p.getAttribute('data-desc');
@@ -1326,6 +1548,11 @@ html{scroll-behavior:smooth}
 
   function close() {
     lb.hidden = true;
+    lbVideo.pause();
+    lbVideo.removeAttribute('src');
+    lbVideo.load();
+    lbVideo.hidden = true;
+    lbImg.hidden = false;
     lbImg.src = '';
     document.body.style.overflow = '';
     if (lastFocus && lastFocus.focus) lastFocus.focus();
@@ -1343,6 +1570,7 @@ html{scroll-behavior:smooth}
   document.addEventListener('keydown', function (e) {
     if (!lb.hidden) {
       if (e.key === 'Escape') { close(); }
+      else if (document.activeElement === lbVideo) { /* let the player have the arrows */ }
       else if (e.key === 'ArrowLeft') { show(index - 1); }
       else if (e.key === 'ArrowRight') { show(index + 1); }
       return;
@@ -1356,7 +1584,7 @@ html{scroll-behavior:smooth}
 
   /* clicking the stage background (not the image) closes */
   document.querySelector('.lb-stage').addEventListener('click', function (e) {
-    if (e.target.tagName !== 'IMG') close();
+    if (e.target.tagName !== 'IMG' && e.target.tagName !== 'VIDEO') close();
   });
 
   /* ── Copy buttons ─────────────────────────────────────────── */

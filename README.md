@@ -14,7 +14,8 @@ src/page.html        the whole site — markup, CSS and JS in one file
 scripts/build.mjs    wraps src/page.html into site/index.html with the <head>
 site/index.html      generated — do not edit by hand
 site/assets/*.webp   artwork, recovered from the live site and re-processed
-site/assets/marco-fresco.mp4   25s film of Marco painting a Madonna fresco
+site/assets/marco-fresco.mp4   25s film — painting a Madonna on a stone wall
+site/assets/marco-*.mp4        four more films of recent work (+ .webp posters)
 site/assets/og.jpg   1200×630 share card
 site/robots.txt      generated
 site/sitemap.xml     generated
@@ -57,7 +58,9 @@ npx http-server site -p 8080
 | Dead "Show More" button | Working filters and a keyboard-navigable lightbox |
 | Bio had typos throughout ("nobel man", "carrier", "he blossoms as a sculpture") | Rewritten, same facts, plus a timeline of Mantova → Verona → Ischia → Paris → LA |
 | Sharing the link produced a blank card | 1200×630 share card rendered from the peacock mural |
-| No video anywhere | 25s film of Marco painting a Madonna freehand, given its own section high on the page |
+| No video anywhere | Five films: the Madonna fresco in its own section, four more in the gallery |
+| Gallery was all 2001–2006 work | A "Recent work" group leading the gallery — current commercial, restaurant and residential jobs |
+| Nav vanished below 860px; tap targets as small as 18px | Scrollable nav rail, every touch target ≥44px, fixed Call/Email bar within thumb reach |
 
 ## The film
 
@@ -76,6 +79,34 @@ Madonna on the exterior wall of a stone building. The edit:
 It autoplays muted and loops, but only when the viewer has not asked for
 reduced motion, and only while on screen. If autoplay is refused the poster
 holds and the button offers play.
+
+Four more films sit in the gallery's "Recent work" group: polished plaster on a
+curved commercial wall, a meadow band painted round a bathroom, a blossom tree
+up a staircase, and a restaurant's wood and textured walls. All five sources
+carried `rotation=-90` metadata — they are portrait, not the landscape their
+stored frames suggest, and one early encode forced them the wrong way round
+before that was caught.
+
+The restaurant clip is cut differently from the rest. The source is 39s of a
+full dining room, so it is reduced to three shots of the surfaces themselves —
+bar cladding, cabinetry, textured wall — and the last is cropped to lift
+diners out of frame. Nobody identifiable appears in it.
+
+Gallery films are poster-only until opened: the tiles are images, and the
+lightbox `<video>` carries `preload="none"` with its `src` set on demand. A
+phone loads about 130KB of posters, and downloads a film only if someone taps
+one.
+
+## Mobile
+
+The header stops being sticky below 860px and a fixed Call / Email bar takes
+over — a two-row pinned header costs an eighth of a phone screen on a site
+whose job is showing pictures, and a thumb-reachable call button converts
+better than one at the top. The nav becomes a scrollable rail, the header CTA
+is dropped as a duplicate of the bottom bar, and a closing block at the end of
+the stylesheet lifts every control to a 44px touch target.
+
+Checked at 390, 768 and 1440: no horizontal overflow at any width.
 
 ## Design
 
