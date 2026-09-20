@@ -216,6 +216,20 @@
       }
     },
     {
+      "@type": "VideoObject",
+      "@id": "https://www.marcolamberti.com/#fresco-film",
+      "name": "Marco Lamberti painting a Madonna fresco",
+      "description": "Marco Lamberti painting a Madonna on the exterior wall of a stone building — freehand, straight onto the render, from a plank laid across two trestles. No projector and no transfer.",
+      "thumbnailUrl": "https://www.marcolamberti.com/assets/marco-fresco-poster.webp",
+      "contentUrl": "https://www.marcolamberti.com/assets/marco-fresco.mp4",
+      "encodingFormat": "video/mp4",
+      "duration": "PT25S",
+      "uploadDate": "2026-09-20",
+      "creator": {
+        "@id": "https://www.marcolamberti.com/#marco"
+      }
+    },
+    {
       "@type": "WebSite",
       "@id": "https://www.marcolamberti.com/#website",
       "url": "https://www.marcolamberti.com",
@@ -408,6 +422,36 @@ h1,h2,h3,.display{
 .hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:26px}
 .hero-cta .btn{color:#f2efe5; border-color:rgba(242,239,229,.4)}
 .hero-cta .btn-solid{color:#fff}
+
+/* ── Film ───────────────────────────────────────────────────── */
+.film{background:var(--surface); border-bottom:1px solid var(--line)}
+.film-in{display:grid; grid-template-columns:minmax(0,340px) minmax(0,1fr); gap:clamp(28px,5vw,58px); align-items:center}
+@media (max-width:820px){ .film-in{grid-template-columns:1fr; gap:28px} }
+.film-frame{
+  position:relative; border:1px solid var(--line); background:#0b1413;
+  aspect-ratio:464/832; max-width:100%; overflow:hidden; justify-self:start; width:100%;
+}
+@media (max-width:820px){ .film-frame{max-width:320px; justify-self:center} }
+.film-frame video{width:100%; height:100%; object-fit:cover; display:block}
+.film-toggle{
+  position:absolute; left:10px; bottom:10px; z-index:2;
+  width:40px; height:40px; display:grid; place-items:center; cursor:pointer; padding:0;
+  border:1px solid rgba(236,233,223,.35); background:rgba(10,18,16,.6); color:#ece9df;
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+}
+.film-toggle:hover{border-color:var(--gilt)}
+.film-tag{
+  position:absolute; right:10px; top:10px; z-index:2;
+  font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600;
+  background:rgba(10,18,16,.62); color:#e8e4d8; padding:5px 8px;
+  backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px);
+}
+.film-body h2{font-size:clamp(1.9rem,4vw,2.9rem); line-height:1.08; margin-top:10px}
+.film-body .lede{margin-top:18px}
+.film-note{
+  margin-top:20px; padding-top:16px; border-top:1px solid var(--line);
+  font-size:.88rem; color:var(--text-3); max-width:56ch;
+}
 
 /* ── Stat strip ─────────────────────────────────────────────── */
 .strip{border-bottom:1px solid var(--line); background:var(--surface)}
@@ -636,6 +680,7 @@ html{scroll-behavior:smooth}
   <div class="wrap head-in">
     <a class="wordmark" href="#top">Marco Lamberti <span>&middot; Los Angeles</span></a>
     <nav class="nav" aria-label="Sections">
+      <a href="#film">Film</a>
       <a href="#work">Work</a>
       <a href="#craft">Craft</a>
       <a href="#story">Story</a>
@@ -671,6 +716,33 @@ html{scroll-behavior:smooth}
     </div>
   </div>
 </div>
+
+<!-- ── Film ─────────────────────────────────────────────────── -->
+<section class="film" id="film">
+  <div class="wrap film-in">
+    <figure class="film-frame" style="margin:0">
+      <span class="film-tag">Freehand &middot; No projector</span>
+      <video id="fresco" poster="assets/marco-fresco-poster.webp" muted loop playsinline
+             preload="metadata" width="464" height="832"
+             aria-label="Marco Lamberti painting a Madonna on the exterior wall of a stone building, seated on a plank with a hand-held palette.">
+        <source src="assets/marco-fresco.mp4" type="video/mp4">
+      </video>
+      <button class="film-toggle" id="film-toggle" type="button" aria-label="Pause film" aria-pressed="true">
+        <svg id="film-icon" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+          <rect x="2.5" y="1.5" width="3.2" height="11" rx="0.4"/><rect x="8.3" y="1.5" width="3.2" height="11" rx="0.4"/>
+        </svg>
+      </button>
+    </figure>
+
+    <div class="film-body">
+      <p class="eyebrow">Watch him work</p>
+      <h2>A wall, a plank, and a palette in one hand.</h2>
+      <p class="lede">A Madonna going up on the outside wall of an old stone building &mdash; painted straight onto the render, freehand, from a plank laid across two trestles. No projector, no transfer, no grid. The drawing is made at full size, on the wall, in the light it will live in.</p>
+      <p class="lede">This is the training the rest of the work rests on. Everything in the gallery below &mdash; the painted loggias, the grisaille panels, the ceilings &mdash; comes out of the same hand doing the same thing.</p>
+      <p class="film-note">25 seconds, no sound. The approach at the start runs at speed; the painting is real time.</p>
+    </div>
+  </div>
+</section>
 
 <!-- ── Strip ────────────────────────────────────────────────── -->
 <div class="strip">
@@ -1162,6 +1234,43 @@ html{scroll-behavior:smooth}
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('ml-theme', next); } catch (e) { /* not persisted */ }
   });
+
+  /* ── Film ────────────────────────────────────────────────────
+     Autoplays muted and looping, but only if the viewer hasn't asked for
+     reduced motion, and only while it is actually on screen. If the browser
+     refuses to autoplay, the poster stays up and the button offers play. */
+  var film = document.getElementById('fresco');
+  var filmBtn = document.getElementById('film-toggle');
+  var filmIcon = document.getElementById('film-icon');
+  var PAUSE_D = '<rect x="2.5" y="1.5" width="3.2" height="11" rx="0.4"/><rect x="8.3" y="1.5" width="3.2" height="11" rx="0.4"/>';
+  var PLAY_D = '<path d="M3.2 1.6 12 7 3.2 12.4Z"/>';
+  var wantsMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var userPaused = !wantsMotion;
+
+  function paintFilmBtn() {
+    var playing = !film.paused;
+    filmIcon.innerHTML = playing ? PAUSE_D : PLAY_D;
+    filmBtn.setAttribute('aria-label', playing ? 'Pause film' : 'Play film');
+    filmBtn.setAttribute('aria-pressed', String(playing));
+  }
+
+  filmBtn.addEventListener('click', function () {
+    if (film.paused) { userPaused = false; film.play().catch(function () {}); }
+    else { userPaused = true; film.pause(); }
+    paintFilmBtn();
+  });
+  film.addEventListener('play', paintFilmBtn);
+  film.addEventListener('pause', paintFilmBtn);
+
+  if (wantsMotion && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting && !userPaused) film.play().catch(function () { paintFilmBtn(); });
+        else if (!e.isIntersecting) film.pause();
+      });
+    }, { threshold: 0.25 }).observe(film);
+  }
+  paintFilmBtn();
 
   /* ── Filters ──────────────────────────────────────────────── */
   var buttons = Array.prototype.slice.call(document.querySelectorAll('.filters button'));

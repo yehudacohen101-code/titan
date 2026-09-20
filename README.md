@@ -14,6 +14,7 @@ src/page.html        the whole site — markup, CSS and JS in one file
 scripts/build.mjs    wraps src/page.html into site/index.html with the <head>
 site/index.html      generated — do not edit by hand
 site/assets/*.webp   artwork, recovered from the live site and re-processed
+site/assets/marco-fresco.mp4   25s film of Marco painting a Madonna fresco
 site/assets/og.jpg   1200×630 share card
 site/robots.txt      generated
 site/sitemap.xml     generated
@@ -56,6 +57,25 @@ npx http-server site -p 8080
 | Dead "Show More" button | Working filters and a keyboard-navigable lightbox |
 | Bio had typos throughout ("nobel man", "carrier", "he blossoms as a sculpture") | Rewritten, same facts, plus a timeline of Mantova → Verona → Ischia → Paris → LA |
 | Sharing the link produced a blank card | 1200×630 share card rendered from the peacock mural |
+| No video anywhere | 25s film of Marco painting a Madonna freehand, given its own section high on the page |
+
+## The film
+
+`site/assets/marco-fresco.mp4` is cut from a 43s phone video of Marco painting a
+Madonna on the exterior wall of a stone building. The edit:
+
+- trimmed 11.0s–42.5s, dropping the long approach and the black tail
+- stabilised in two passes with `vidstab` (it was shot walking, handheld)
+- the walk-up (11–22s) runs at 2.2×, the painting at real time, joined by a
+  0.5s crossfade, with fades at both ends
+- denoised with `hqdn3d` — WhatsApp compression noise was costing ~1MB
+- audio stripped: the page autoplays it muted, which is the only way browsers
+  allow autoplay, and the track was wind on a phone mic
+- H.264 High/L4.0, yuv420p, faststart, 25.1s, 2.7MB
+
+It autoplays muted and loops, but only when the viewer has not asked for
+reduced motion, and only while on screen. If autoplay is refused the poster
+holds and the button offers play.
 
 ## Design
 

@@ -288,12 +288,25 @@ html{scroll-behavior:smooth}
           <li class="n"><span class="m">&times;</span><span>The Wix plan keeps billing</span></li>
         </ul>
       </div>
+      <div class="route">
+        <span class="tag">Middle ground</span>
+        <h3>Route C &mdash; Wix AI, new site</h3>
+        <p style="color:var(--text-2); font-size:.95rem">Generate a <b>new</b> Wix site with the AI builder from the brief below, load the real content into it, then move the domain across.</p>
+        <ul>
+          <li class="y"><span class="m">&#10003;</span><span>Marco keeps the Wix editor</span></li>
+          <li class="y"><span class="m">&#10003;</span><span>Far better starting point than the current site</span></li>
+          <li class="y"><span class="m">&#10003;</span><span>Fastest route to <b>something decent</b></span></li>
+          <li class="n"><span class="m">&times;</span><span>Wix AI <b>cannot edit an existing site</b> &mdash; new site only</span></li>
+          <li class="n"><span class="m">&times;</span><span>Output will be generic; the artwork and captions still go in by hand</span></li>
+        </ul>
+      </div>
     </div>
 
     <div class="callout warn" style="margin-top:26px">
       <h3>How to choose</h3>
-      <p>The only real argument for Route B is <b>&ldquo;Marco needs to update it himself.&rdquo;</b> Worth testing that honestly: the DNS zone for this domain was last set up in 2018, and the site still lists work photographed on an iPhone 5s. If it has not been edited in years, the visual editor is a cost being paid for a benefit nobody uses.</p>
-      <p>If updates are genuinely wanted, Route A still allows them &mdash; they just go through whoever holds the files, not through Marco.</p>
+      <p>The only real argument for B or C is <b>&ldquo;Marco needs to update it himself.&rdquo;</b> Worth testing that honestly: the DNS zone for this domain was last set up in 2018, and the site still shows work photographed on an iPhone 5s. If it has not been edited in years, the visual editor is a cost being paid for a benefit nobody uses. Under Route A updates still happen &mdash; they just go through whoever holds the files.</p>
+      <p>Between B and C, <b>take C</b>. Rebuilding the current site by hand is hours of work to land somewhere worse than what the AI builder gives you from a good brief. The one catch is that Wix AI builds a <b>new</b> site, so the domain has to be pointed at it either way &mdash; which is the same DNS work as Route A, for a worse result.</p>
+      <p>Which is the honest summary: <b>every route requires touching DNS.</b> Given that, the question is only what you want at the other end.</p>
     </div>
   </div>
 </section>
@@ -386,8 +399,16 @@ html{scroll-behavior:smooth}
       </label></li>
 
       <li><label>
-        <input type="checkbox" data-k="c2">
+        <input type="checkbox" data-k="c11">
         <span class="rank">02</span>
+        <span class="body"><b>Put the fresco video on the site</b>
+          <span>Twenty-five seconds of Marco painting a Madonna freehand on a stone wall. It is the most persuasive thing he has &mdash; it proves the skill in a way no photograph can. The edited file is <code>site/assets/marco-fresco.mp4</code>. Set it to autoplay, muted, looping.</span>
+          <span class="where">Media Manager &rarr; upload &rarr; Add &rarr; Video</span></span>
+      </label></li>
+
+      <li><label>
+        <input type="checkbox" data-k="c2">
+        <span class="rank">03</span>
         <span class="body"><b>Rename the <code>/blank</code> page</b>
           <span>The murals gallery &mdash; the most commercially valuable page &mdash; lives at marcolamberti.com/blank. Change the slug to <code>murals-faux-finish</code> and let Wix add the redirect when it offers.</span>
           <span class="where">Pages menu &rarr; page settings &rarr; Page URL</span></span>
@@ -395,7 +416,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c3">
-        <span class="rank">03</span>
+        <span class="rank">04</span>
         <span class="body"><b>Write the SEO title and description for every page</b>
           <span>All five pages are titled &ldquo;PAGE&nbsp;|&nbsp;marcolambertiart&rdquo; with no description at all. Exact text to paste is in the snippet pack below.</span>
           <span class="where">Page settings &rarr; SEO Basics &rarr; Title tag / Meta description</span></span>
@@ -403,7 +424,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c4">
-        <span class="rank">04</span>
+        <span class="rank">05</span>
         <span class="body"><b>Add alt text to every image</b>
           <span>Every image on the site has an empty alt attribute. This is both an accessibility problem and the reason none of the artwork appears in image search. Text for all fifteen is in the snippet pack.</span>
           <span class="where">Click image &rarr; Settings &rarr; What's in the image?</span></span>
@@ -411,7 +432,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c5">
-        <span class="rank">05</span>
+        <span class="rank">06</span>
         <span class="body"><b>Add a call to action</b>
           <span>There is no button anywhere asking anyone to get in touch. Add &ldquo;Discuss a commission&rdquo; to the homepage and the end of each gallery, linked to <code>tel:+13105946217</code> and <code>mailto:artnmotion54@yahoo.com</code>.</span>
           <span class="where">Add &rarr; Button &rarr; Link &rarr; Web address</span></span>
@@ -419,7 +440,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c6">
-        <span class="rank">06</span>
+        <span class="rank">07</span>
         <span class="body"><b>Say &ldquo;Los Angeles&rdquo; somewhere</b>
           <span>The phone number is a 310, but the words Los Angeles appear nowhere on the site. Nobody searching for a muralist in LA can find it. Fill in the business address and phone so Wix publishes local business data.</span>
           <span class="where">Dashboard &rarr; Settings &rarr; Business Info</span></span>
@@ -427,7 +448,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c7">
-        <span class="rank">07</span>
+        <span class="rank">08</span>
         <span class="body"><b>Set a social share image</b>
           <span>Texting the link today produces a blank grey card. Upload <code>site/assets/og.jpg</code> from the new build &mdash; it is already sized 1200&times;630.</span>
           <span class="where">Page settings &rarr; Social Share</span></span>
@@ -435,7 +456,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c8">
-        <span class="rank">08</span>
+        <span class="rank">09</span>
         <span class="body"><b>Fix or remove the &ldquo;Show More&rdquo; button</b>
           <span>The button under the murals gallery does nothing when clicked &mdash; there are no further images behind it. Either load more work into the gallery or delete the button.</span>
           <span class="where">Murals page &rarr; gallery settings</span></span>
@@ -443,7 +464,7 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c9">
-        <span class="rank">09</span>
+        <span class="rank">10</span>
         <span class="body"><b>Replace the About text</b>
           <span>The current biography reads &ldquo;son of a nobel man&rdquo;, &ldquo;a more traditional carrier&rdquo; and &ldquo;he blossoms as a sculpture&rdquo;. It also names four celebrity clients Marco has confirmed he has <b>no permission to name</b> &mdash; those must come off today, whichever route is taken. Corrected text is in the snippet pack.</span>
           <span class="where">About page &rarr; text box</span></span>
@@ -451,13 +472,98 @@ html{scroll-behavior:smooth}
 
       <li><label>
         <input type="checkbox" data-k="c10">
-        <span class="rank">10</span>
+        <span class="rank">11</span>
         <span class="body"><b>Re-upload the images at full size</b>
           <span>Several pieces exist online only as roughly 300-pixel scans. If the original photographs or negatives still exist, re-scan and re-upload them. This matters more than anything else on this list except the homepage.</span>
           <span class="where">Media Manager</span></span>
       </label></li>
     </ul>
-    <p class="progress" id="progress">0 of 10 done</p>
+    <p class="progress" id="progress">0 of 11 done</p>
+  </div>
+</section>
+
+<!-- ── Route C ────────────────────────────────────────────── -->
+<section>
+  <div class="wrap">
+    <p class="eyebrow">Route C</p>
+    <h2 style="margin-top:10px">Using Wix&rsquo;s AI builder</h2>
+    <p class="lede">A reasonable middle path, with one catch worth knowing before starting.</p>
+
+    <div class="callout warn">
+      <h3>Wix AI builds new sites. It does not rebuild existing ones.</h3>
+      <p>Per Wix&rsquo;s own documentation, the AI Website Builder <b>can only be used to create new sites, not to edit existing sites</b>. You cannot point it at marcolamberti.com and ask it to fix it. It makes a second, separate site &mdash; and the domain then has to be moved to that new site.</p>
+      <p>Which means Route C needs the same DNS work as Route A. Keep the current site published until the new one is finished and the domain has moved; nothing is lost by taking your time.</p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <h3>Create a new site with the AI builder</h3>
+          <p>In the Wix dashboard: <b>Create New Site</b> &rarr; choose to build with AI. It opens with a question about the business. Paste the short description below into that first box; it is written to give the generator the right shape in one go.</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>A one-man decorative painting studio in Los Angeles. Marco Lamberti is an Italian-trained muralist who paints trompe-l'œil murals, ceilings, Venetian plaster, gilding, faux marble and bas-relief by hand, on site. He trained in Verona and Ischia, worked in Locarno and Paris, and has worked in Southern California since the 1980s — over 150 projects across private homes, restaurants and commercial interiors, from Los Angeles to San Diego. He also restores existing murals and decorative finishes. The site is a portfolio: it exists to show the work and get designers, architects, restaurateurs and homeowners to call or email about a commission. The tone should be quiet, confident and gallery-like — not salesy. Dark background, large photographs, elegant serif headings.</pre></div>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Give it the page structure</h3>
+          <p>Wix AI will produce something generic unless it is told the order. Ask it for a one-page site with these sections, in this sequence. Each one earns its place; the order is the argument the site makes.</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>Build it as a single long homepage with these sections in this order:
+
+1. HERO — full-width photograph of the peacock mural, dark overlay, headline over it: "Rooms that look like somewhere else." Subhead: "Marco Lamberti trained in the Italian decorative tradition — Verona, Ischia, Paris — and has painted homes, restaurants and commercial interiors across Southern California since the 1980s." Two buttons: "Discuss a commission" and "See the work".
+
+2. FACT STRIP — four cells across: "150+ projects completed" / "Since the 1980s in California" / "Homes, restaurants & commercial" / "LA to San Diego".
+
+3. FILM — a vertical video of Marco painting a Madonna on a stone wall, beside text headed "A wall, a plank, and a palette in one hand." Set it to autoplay, muted, looping.
+
+4. WHAT HE DOES — a short paragraph, then a glossary grid of the actual trade terms: trompe-l'œil, grisaille, marmorino, bas-relief, strié, doratura (gilding), finto marmo, patina, restauro. One line of definition each.
+
+5. THE WORK — a filterable gallery in three groups: Murals & trompe-l'œil, Decorative finishes, Studio paintings (not for sale). Every image gets a real title and a caption naming the technique, the city and the year. Clicking opens a larger view.
+
+6. THE MAKER — his biography beside a portrait, plus a timeline: Mantova → Verona → Ischia → Locarno & Paris → Los Angeles.
+
+7. TRACK RECORD — four cells: Private homes / Restaurants / Commercial interiors / Restoration. No client names.
+
+8. ENQUIRIES — headline "Tell him about the room.", phone 310 594-6217 as a tap-to-call link, email artnmotion54@yahoo.com, service area, and a contact form.
+
+Do not invent testimonials, client names, prices, awards or statistics. Use only the text I give you.</pre></div>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Set the look</h3>
+          <p>Left alone, Wix AI will reach for a bright, generic template. Give it the palette and the typefaces directly.</p>
+          <div class="code"><button class="copy" type="button">Copy</button><pre>Colours — background dark green-black #101A18, raised panels #182523, body text #ECE9DF, muted text #A7B4AD, accent blue #3F9AB8, gold hairlines and small labels #BB9448.
+
+Headings — Bodoni Moda, regular weight, large, generous line spacing. Body and buttons — Archivo. Small labels in uppercase with wide letter-spacing.
+
+Layout — thin 1px rules rather than boxes and drop shadows. No rounded corners. No gradients except a dark overlay on the hero photograph. Let the photographs be large and let the space around them be quiet. Must work on a phone.</pre></div>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Load the real content</h3>
+          <p>The AI writes placeholder text and picks stock photography. All of it has to come out. Upload the sixteen images and the video from the <code>site/assets</code> folder, then paste in the page titles, meta descriptions, alt text, biography and service list from the snippet pack below &mdash; they are written for this and work in Wix unchanged.</p>
+          <p><b>Delete every stock photo the AI adds.</b> A generic image of someone else&rsquo;s painted wall on a page selling Marco&rsquo;s hand is worse than an empty space.</p>
+        </div>
+      </li>
+
+      <li>
+        <div>
+          <h3>Move the domain, then retire the old site</h3>
+          <p>Connect marcolamberti.com to the new site from the new site&rsquo;s dashboard (<b>Settings</b> &rarr; <b>Domains</b> &rarr; assign the domain). Because both sites are on Wix this is an assignment rather than a DNS edit &mdash; but note that Wix deletes custom-code snippets when a site&rsquo;s domain changes, so add any tracking code <i>after</i> the move, not before.</p>
+          <p>Leave the old site unpublished rather than deleted for a month, in case something is missing.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="callout">
+      <h3>What Route C will not give you</h3>
+      <p>The AI will not reproduce the page that was built. Expect to lose the lightbox, the gallery filters, the glossary layout, the structured data, and the typographic detail. Expect to fight it on spacing.</p>
+      <p>What you will get is a site that <b>shows the work on the homepage</b>, which is the single biggest problem with what is live today. That alone is most of the value. If Route C gets it done and Route A does not, take Route C.</p>
+    </div>
   </div>
 </section>
 
