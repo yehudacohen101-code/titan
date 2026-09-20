@@ -122,6 +122,7 @@ const jsonLd = {
         'building in Switzerland — freehand, straight onto the render, from a ' +
         'plank laid across two trestles. No projector and no transfer.',
       contentLocation: { '@type': 'Country', name: 'Switzerland' },
+      dateCreated: '2023',
       thumbnailUrl: `${SITE.origin}/assets/marco-fresco-poster.webp`,
       contentUrl: `${SITE.origin}/assets/marco-fresco.mp4`,
       encodingFormat: 'video/mp4',

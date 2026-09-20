@@ -65,8 +65,8 @@ npx http-server site -p 8080
 ## The film
 
 `site/assets/marco-fresco.mp4` is cut from a 43s phone video of Marco painting a
-Madonna on the exterior wall of a stone building in Switzerland (confirmed by
-Marco; the canton and the year are still unknown). The edit:
+Madonna on the exterior wall of a stone building in Switzerland in 2023, both
+confirmed by Marco (the canton is still unknown). The edit:
 
 - trimmed 11.0s–42.5s, dropping the long approach and the black tail
 - stabilised in two passes with `vidstab` (it was shot walking, handheld)
